@@ -25,7 +25,7 @@ console.log(adduser);
       
        var encryptedPassword = await bcrypt.hash(adduser.password, 10);
        adduser.password = encryptedPassword;
-       adduser.role = "629e55fac6f01f206d801e59"
+     //  adduser.role = "629e55fac6f01f206d801e59"
        let insertuser = await adduser.save();
        console.log(insertuser);
       

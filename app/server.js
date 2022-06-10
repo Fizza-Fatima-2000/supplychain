@@ -11,7 +11,7 @@ const user_router = require('./routes/users.routes');
 app.use(user_router)
 
 app.use(cors({
-    origin: 'http://localhost:3000'}));
+    origin:'http://localhost:3000'}));
 
 app.listen(PORT, () => {
     console.log(`server is start ${PORT}`)
