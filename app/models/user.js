@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 //creating schema of category
-const users_schema = new mongoose.Schema({
-    
+const user_schema = new mongoose.Schema({
+     
     name: {
         type: String,
         required: true
@@ -28,11 +28,19 @@ const users_schema = new mongoose.Schema({
 
         ref: "roles"
    },
-})
+   
+
+  
+ 
+   
+}
+
+
+)
 
 //creating collection
-const users = new mongoose.model('users', users_schema)
+const user = new mongoose.model('user', user_schema)
 
 
 //export collection
-module.exports =  users ;
+module.exports =  user ;

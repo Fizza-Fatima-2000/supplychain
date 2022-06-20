@@ -1,5 +1,5 @@
 
-const  users  = require("../models/users")
+const  users  = require("../models/user")
 
 checkDuplicateEmail = async (req, res, next) => {
 

@@ -1,6 +1,6 @@
 const express = require("express");
 const user_router = express.Router();
-const {Signup , signIn} = require("../controllers/users.controller")
+const {Signup , signIn} = require("../controllers/user.controller")
 
 const { checkMissingField ,checkDuplicateEmail } = require("../middleware//sign_up.validate");
 

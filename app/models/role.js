@@ -1,3 +1,4 @@
+const { Timestamp } = require('mongodb');
 const mongoose = require('mongoose');
 const ObjectId = mongoose.Schema.Types;
 
@@ -8,9 +9,9 @@ const role_schema = new mongoose.Schema({
     role: {
         type: String,
         required: true,
-        trim: true
+    
     }
-
+ 
 })
 
 
