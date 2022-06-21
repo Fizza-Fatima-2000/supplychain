@@ -23,12 +23,12 @@ const add_product = async (req, res)=>{
         location : req.body.location,
         type : req.body.type
     })
-    let insertadv = await inserting_product.save();
+    let insertproduct = await inserting_product.save();
     console.log(inserting_product);
     let helperfunction = () => {
         let response = res.statusCode;
         let messages = "prodct";
-        let Data = { insertadv}
+        let Data = {insertproduct}
         let status = true;
         
         return res.status(201).send({ response: response, message: messages, status: status , Data : Data})

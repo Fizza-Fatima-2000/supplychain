@@ -82,11 +82,11 @@ const signIn = async (req, res) => {
           console.log("sign in");
 
 
-          if (req.body.type == "admin") {
+          if (req.body.type == admin) {
             const checking = await role.findOne({
                 _id: user.role
             })
-            if (checking.role != "admin") {
+            if (checking.role != admin) {
                 returnFunction(406,"Can't Login, Only Admin access",false,null,res)
              
             }
