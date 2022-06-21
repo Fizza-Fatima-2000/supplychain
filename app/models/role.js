@@ -15,8 +15,8 @@ const role_schema = new mongoose.Schema({
 })
 
 
-const Role = new mongoose.model('roles', role_schema)
+const role = new mongoose.model('role', role_schema)
 
 
 //export collection
-module.exports =  Role ;
+module.exports = { role} ;

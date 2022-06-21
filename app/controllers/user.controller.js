@@ -4,7 +4,7 @@ const app = express();
 require("dotenv").config();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
-const { Role } = require('../models/role')
+const { role } = require('../models/role')
 
 
 //for sign up
@@ -18,14 +18,15 @@ const Signup = async (req, res) => {
         email : req.body.email,
         phoneno : req.body.phoneno,
         password : req.body.password,
-        
+      //  type: req.body.type,
+       // role : req.body.role
       }); 
 
 console.log(adduser);
       
        var encryptedPassword = await bcrypt.hash(adduser.password, 10);
        adduser.password = encryptedPassword;
-     //  adduser.role = "629e55fac6f01f206d801e59"
+      adduser.role = "62b243bff95f821643170749"
        let insertuser = await adduser.save();
        console.log(insertuser);
       
@@ -82,7 +83,7 @@ const signIn = async (req, res) => {
 
 
           if (req.body.type == "admin") {
-            const checking = await Role.findOne({
+            const checking = await role.findOne({
                 _id: user.role
             })
             if (checking.role != "admin") {

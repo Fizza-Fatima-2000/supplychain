@@ -28,6 +28,9 @@ const user_schema = new mongoose.Schema({
 
         ref: "roles"
    },
+   type:{
+    type:String
+   }
    
 
   

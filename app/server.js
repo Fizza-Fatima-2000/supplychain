@@ -16,8 +16,9 @@ app.use(express.json())
 app.use(express.urlencoded({extended:true}));
 const user_router = require('./routes/users.routes');
 const supplier_router=require('./routes/supplier.routes')
-const product_router=require('./routes/product.routes')
-app.use([user_router,supplier_router, product_router])
+const product_router=require('./routes/product.routes');
+const role_routers = require('./routes/role.routes');
+app.use([user_router,supplier_router, product_router , role_routers])
 
 
 
