@@ -3,7 +3,7 @@ const app= express()
 const{ role} = require('..//models/role');
 //const users = require('./user.controller')
 //const user =require('../middleware/auth')
-
+ const { helperfunction }= require('../utils/helperfunction')
 
 
 
@@ -20,17 +20,9 @@ const add_role = async (req, res)=>{
     })
     let roleadd = await inserting_role.save();
     console.log(inserting_role);
-    let helperfunction = () => {
-        let response = res.statusCode;
-        let messages = "role";
-        let Data = roleadd;
-        let status = true;
+ 
         
-        return res.status(201).send({ response: response, message: messages, status: status , Data : Data})
-    }
-
-
-    helperfunction()
+        return res.status(201).send({ response: 200, message: "roles", status: true , Data : inserting_role})
   
 
 } catch (error) {

@@ -3,15 +3,7 @@ const app= express()
 const supplier = require('../models/supplier');
 const users = require('./user.controller')
 const user =require('../middleware/auth')
-//hepling function
-const returnFunction = (resCode,msg,Status,data,res) => {
-    let response = resCode;
-    let messages = msg;
-    let status = Status;
-    let Data = data;
-    return res.status(resCode).send({ response: response, message: messages, status: status, Data: Data })
-}
-
+const { heplerfunction } = require('../utils/helperfunction')
 
 //insert supplier
  
@@ -32,7 +24,7 @@ console.log(user_id);
     })
     
     console.log(inserting_supplier);
-    returnFunction(200,"Supplier",true , inserting_supplier)
+    return res.status(200).send({ response: 200, message: " Supplier", status: true , Data : inserting_supplier})
 }
 } catch (error) {
         console.log(error)
@@ -47,7 +39,7 @@ const info_supplier = async (req, res)=>{
         
     
     const get_info = await supplier.find()
-    returnFunction(200,"Supplier",true , get_info, res )
+    return res.status(200).send({ response: 200, message: "All Supplier", status: true , Data : info_supplier})
 
 } catch (error) {
      res.send(error)

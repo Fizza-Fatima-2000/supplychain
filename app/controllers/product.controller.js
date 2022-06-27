@@ -25,7 +25,7 @@ const add_product = async (req, res)=>{
     var forsave = await inserting_product.save();
 
         
-        return res.status(201).send({ response: response, message: "product added", status: true , Data : forsave})
+        return res.status(200).send({ response: 200 , message: "product added", status: true , Data : forsave})
     }
 //}
 
@@ -47,7 +47,7 @@ const info_product = async (req, res)=>{
    console.log(get_info);
         
        // return res.status(201).send({ response: response, message: " All Product", status: status , Data : { get_info}})
-        return res.status(200).send({ response: response, message: " All Product", status: true  , Data: get_info});
+        return res.status(200).send({ response:200, message: " All Product", status: true  , Data: get_info});
 
 
 } catch (error) {
