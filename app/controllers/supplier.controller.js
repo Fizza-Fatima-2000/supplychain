@@ -8,11 +8,11 @@ const { heplerfunction } = require('../utils/helperfunction')
 //insert supplier
  
 const add_suplier = async (req, res)=>{
-    console.log("hello");
+ 
     try {
-        console.log("hello");
+        
         var user_id = req.user_id;
-console.log(user_id);
+
         const sup = await supplier.findOne( {user_id: user_id})
         if(sup){
             
@@ -22,9 +22,9 @@ console.log(user_id);
         name : req.body.name,
         email: req.body.email
     })
-    
-    console.log(inserting_supplier);
-    return res.status(200).send({ response: 200, message: " Supplier", status: true , Data : inserting_supplier})
+     var for_save = await inserting_supplier.save();
+         console.log(inserting_supplier);
+    return res.status(200).send({ response: 200, message: " Supplier", status: true , Data : for_save})
 }
 } catch (error) {
         console.log(error)
