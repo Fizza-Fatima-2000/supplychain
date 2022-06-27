@@ -1,19 +1,18 @@
 const express = require('express')
 const app= express()
 const product = require('../models/product');
-//const users = require('./user.controller')
-//const user =require('../middleware/auth')
 
+const { helperfunction }= require('../utils/helperfunction');
 
 
 
 //insert supplier
  
 const add_product = async (req, res)=>{
-   var user_id = req.user_.id;
+  // var user_id = req.user_.id;
     try {
-        const finding = await product.findOne({user_id: user_id})
-        if(finding){
+      //  const finding = await product.findOne({user_id: user_id})
+       // if(finding){
     const inserting_product =await new product({
       
        pro_name : req.body.pro_name,
@@ -23,22 +22,16 @@ const add_product = async (req, res)=>{
         location : req.body.location,
         type : req.body.type
     })
-    let insertproduct = await inserting_product.save();
-    console.log(inserting_product);
-    let helperfunction = () => {
-        let response = res.statusCode;
-        let messages = "prodct";
-        let Data = {insertproduct}
-        let status = true;
+    var forsave = await inserting_product.save();
+
         
-        return res.status(201).send({ response: response, message: messages, status: status , Data : Data})
+        return res.status(201).send({ response: response, message: "product added", status: true , Data : forsave})
     }
-}
+//}
 
-    helperfunction()
-  
+ 
 
-} catch (error) {
+catch (error) {
         console.log(error)
         res.send(error);
 }
@@ -51,17 +44,11 @@ const info_product = async (req, res)=>{
         
     
     const get_info = await product.find({})
-    let helperfunction = () => {
-        let response = res.statusCode;
-        let messages = "prodct";
-        let Data = {get_info}
-        let status = true;
+   console.log(get_info);
         
-        return res.status(201).send({ response: response, message: messages, status: status , Data : Data})
-    }
+       // return res.status(201).send({ response: response, message: " All Product", status: status , Data : { get_info}})
+        return res.status(200).send({ response: response, message: " All Product", status: true  , Data: get_info});
 
-    helperfunction()
-  
 
 } catch (error) {
      res.send(error)
