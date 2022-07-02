@@ -1,40 +1,48 @@
 const jwt = require("jsonwebtoken");
-const { users } = require("../models/user");
-const config = process.env;
-var { ObjectId } = require('mongodb')
+const { Users } = require("../models/users");
+var { ObjectId } = require('mongodb');
+const { helperFunction } = require("../utils/helperFunction");
 const verifyAdmin = async(req, res, next) => {
     const token =
         req.body.token || req.query.token || req.headers["x-access-token"];
     if (!token) {
-        return res.status(403).send("A token is required for authentication");
+        return helperFunction(res, 403, "A Token Is Required For Authentication", false)
     }
     if (token) {
         try {
-            const decoded = jwt.verify(token, config.TOKEN_KEY);
+            const decoded = jwt.verify(token, process.env.TOKEN_KEY);
             req.user = decoded;
-            var objall = ObjectId(req.user._id)
-            console.log(objall)
-            const verify1 = await users.aggregate([
-                { $match: { _id: objall } },
-                { $project: { "_id": 1, "role": 1 } },
-                {
-                    $lookup: {
-                        from: "roles",
-                        localField: "role",
-                        foreignField: "_id",
-                        as: "verify"
-                    }
-                }, { $project: { verify: 1, _id: 0 } }
-            ])
-            console.log(verify1)
-            if (verify1[0].verify[0].role === "admin") {
-                return next();
-            } else {
-                return res.send("only admin can do this")
-            }
+            var userId = ObjectId(req.user._id)
+            console.log(userId)
+            // const data = await Users.aggregate([
+            //     { $match: { _id: userId } },
+            //     // { $project: { "_id": 1, "role": 1 } },
+            //     {
+            //         $lookup: {
+            //             from: "roles",
+            //             localField: "role",
+            //             foreignField: "_id",
+            //             as: "roles"
+            //         }
+                   
+            //     }, 
+            //     {$unwind : '$roles'},
+            //     {
+            //         $project: {
+            //          _id:0,  role:"$roles.role"
+            //         }
+            //      }
+            // ])
+            // if (data[0].role === "admin") {
+            //     return next();
+            // } else {
+            //     // return helperFunction(res, 403, "Sorry Access Denied", false)
+            //     console.log("Sorry Access Denied")
+            // }
         } catch (err) {
-            console.log(err)
-            return res.send({ response: res.statusCode, message: "some error is occured", status: false, Data: null })
+            console.trace('Inside Catch => ', error);
+            //  return helperFunction.serverError(res, "Some Error Is Occurred")
+            console.log("Error")
         }
 
     }
