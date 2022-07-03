@@ -5,11 +5,12 @@ require("dotenv").config();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { role } = require('../models/role')
+const helperFunction = require('../utils/helperfunction')
 
 
 //for sign up
 const Signup = async (req, res) => {
-  console.log(req.body.name);
+  //console.log(req.body.name);
   try {
 
       const adduser = await new users({
@@ -18,7 +19,7 @@ const Signup = async (req, res) => {
         email : req.body.email,
         phoneno : req.body.phoneno,
         password : req.body.password,
-      //  type: req.body.type,
+        //type: "User"
        // role : req.body.role
       }); 
 
@@ -27,6 +28,7 @@ console.log(adduser);
        var encryptedPassword = await bcrypt.hash(adduser.password, 10);
        adduser.password = encryptedPassword;
       adduser.role = "62b243bff95f821643170749"
+      adduser.type ="Users"
        let insertuser = await adduser.save();
        console.log(insertuser);
       
@@ -41,16 +43,7 @@ console.log(adduser);
 
       var tokens = token;
 
-      let helperfunction = () => {
-          let response = res.statusCode;
-          let messages = "Sign-up Successful";
-          let Data = {adduser , tokens}
-          let status = true;
-          
-          return res.status(201).send({ response: response, message: messages, status: status , Data : Data})
-      }
-
-      helperfunction()
+      return res.status(200).send({ response: 200 , message: "Sign-up Successfully", status: true , Data :[adduser , token]})
     
 
   } catch (e) {
@@ -61,7 +54,6 @@ console.log(adduser);
 
 
 
-//sign in
 
 
 //Sign In
@@ -84,9 +76,9 @@ const signIn = async (req, res) => {
 
           if (req.body.type == "admin") {
             const checking = await role.findOne({
-                _id: user.role
+              _id : user.role
             })
-            if (checking.role != admin) {
+            if (checking.role != "admin") {
                 returnFunction(406,"Can't Login, Only Admin access",false,null,res)
              
             }
@@ -103,19 +95,9 @@ const signIn = async (req, res) => {
           
           //}
           var tokens = token;
-
+          return res.status(200).send({ response: 200 , message: "Login Successfully", status: true , Data : user.name , token})
           // user
-          let helperfunction = () => {
-              let response = res.statusCode;
-              let messages = "Login Successful ";
-              let status = true;
-              let Data = { name: user.name,tokens };
-              return res.status(200).send({ response: response, message: messages, status: status, Data: Data })
-          }
-
-          helperfunction()
-          // return res.status(200).json(tokens);
-
+         
 
       }
       else{

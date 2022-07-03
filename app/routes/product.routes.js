@@ -7,6 +7,8 @@ const verifyAdmin = require("../middleware/admin.auth");
 
 
 product_router.post('/api/add_product',[verifyToken,verifyAdmin],add_product)
+product_router.get('/api/get_product',[verifyToken,verifyAdmin], info_product)
+
 
 
 module.exports = product_router;

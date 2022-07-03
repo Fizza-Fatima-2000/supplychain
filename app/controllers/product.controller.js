@@ -9,10 +9,7 @@ const { helperfunction }= require('../utils/helperfunction');
 //insert supplier
  
 const add_product = async (req, res)=>{
-  // var user_id = req.user_.id;
     try {
-      //  const finding = await product.findOne({user_id: user_id})
-       // if(finding){
     const inserting_product =await new product({
       
        pro_name : req.body.pro_name,
@@ -27,10 +24,6 @@ const add_product = async (req, res)=>{
         
         return res.status(200).send({ response: 200 , message: "product added", status: true , Data : forsave})
     }
-//}
-
- 
-
 catch (error) {
         console.log(error)
         res.send(error);
