@@ -94,14 +94,10 @@ const signIn = async (req, res) => {
 
           // if(email || phoneno && password){
           const token = jwt.sign(
-              { _id: user._id, email: user.email, phoneno: user.phoneno },
-
-              // "hardcodedTOKEN_KEY",
-             "process.env.TOKEN_KEY",
-
-              {
-                  expiresIn: "24h",
-              }
+              { _id: user._id, email: user.email, phoneno: user.phoneno,role:user.role },
+              process.env.TOKEN_KEY, {
+                expiresIn: "1d",
+            }
               
           );
           
@@ -122,8 +118,9 @@ const signIn = async (req, res) => {
 
 
       }
-
-      return res.status(400).send("Invalid Credentials");
+      else{
+        return res.status(400).send("Invalid Credentials");
+      }
   } catch (err) {
       console.log(err);
   }
