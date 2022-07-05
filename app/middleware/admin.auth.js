@@ -1,7 +1,6 @@
 const jwt = require("jsonwebtoken");
 const user  = require("../models/user");
 var { ObjectId } = require('mongodb');
-const { helperFunction } = require("../utils/helperFunction");
 const verifyAdmin = async(req, res, next) => {
     const token =
         req.body.token || req.query.token || req.headers["x-access-token"];
