@@ -8,25 +8,19 @@ const { heplerfunction } = require('../utils/helperfunction')
 //insert supplier
  
 const add_suplier = async (req, res)=>{
- 
-    try {
-        
-        var user_id = req.user_id;
-
-        const sup = await supplier.findOne( {user_id: user_id})
-        if(sup){
-            
+    try {        
     const inserting_supplier =await new supplier({
-       // user_id: req.user_id,
-       user_id: user_id,
-        name : req.body.name,
-        email: req.body.email
+      
+      
+       supplier_name : req.body.supplier_name,
+        email: req.body.email,
+        supplier_phoneno : req.body.supplier_phoneno
     })
      var for_save = await inserting_supplier.save();
          console.log(inserting_supplier);
     return res.status(200).send({ response: 200, message: " Supplier", status: true , Data : for_save})
 }
-} catch (error) {
+ catch (error) {
         console.log(error)
         res.send(error);
 }

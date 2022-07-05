@@ -6,7 +6,7 @@ const Schema = mongoose.Schema;
 //creating schema of category
 const supplier_schema = new mongoose.Schema({
      
-    name: {
+    supplier_name: {
         type: String,
         required: true
     }, 
@@ -14,6 +14,10 @@ const supplier_schema = new mongoose.Schema({
         type:String,
         unique: true
     },
+supplier_Phoneno :{
+    type: String
+},
+
    
     // phoneno :{
     //     type : String

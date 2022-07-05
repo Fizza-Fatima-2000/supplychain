@@ -12,13 +12,13 @@ const helperFunction = require('../utils/helperfunction')
 const Signup = async (req, res) => {
   //console.log(req.body.name);
   try {
-
+      const {name,email,phoneno,password}=req.body
       const adduser = await new users({
 
-        name : req.body.name,
-        email : req.body.email,
-        phoneno : req.body.phoneno,
-        password : req.body.password,
+        name,
+        email,
+        phoneno,
+        password
         //type: "User"
        // role : req.body.role
       }); 
