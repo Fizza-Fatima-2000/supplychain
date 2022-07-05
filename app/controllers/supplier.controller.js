@@ -9,12 +9,13 @@ const { heplerfunction } = require('../utils/helperfunction')
  
 const add_suplier = async (req, res)=>{
     try {        
+        const {supplier_name, email , supplier_phoneno} = req.body;
     const inserting_supplier =await new supplier({
       
       
-       supplier_name : req.body.supplier_name,
-        email: req.body.email,
-        supplier_phoneno : req.body.supplier_phoneno
+       supplier_name ,
+        email,
+        supplier_phoneno 
     })
      var for_save = await inserting_supplier.save();
          console.log(inserting_supplier);
@@ -33,7 +34,7 @@ const info_supplier = async (req, res)=>{
         
     
     const get_info = await supplier.find()
-    return res.status(200).send({ response: 200, message: "All Supplier", status: true , Data : info_supplier})
+    return res.status(200).send({ response: 200, message: "All Supplier", status: true , Data : get_info})
 
 } catch (error) {
      res.send(error)
