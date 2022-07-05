@@ -31,9 +31,7 @@ const verifyAdmin = async(req, res, next) => {
                     }
                  }
             ])
-            if (data[0].role === "admin") {
-                return next();
-            } else {
+            if (data[0].role !== "admin") {
                 console.log("Sorry Access Denied")
                 let helperfunction = () => {
                     let response = 403;
@@ -43,13 +41,14 @@ const verifyAdmin = async(req, res, next) => {
                 }
       
                 helperfunction()
-               
-            }
+                
+            } 
         } catch (err) {
             console.trace('Inside Catch => ', err);
             //  return helperFunction.serverError(res, "Some Error Is Occurred")
             console.log("Error")
         }
+        return next();
 
     }
 
