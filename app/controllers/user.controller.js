@@ -5,7 +5,8 @@ require("dotenv").config();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { role } = require('../models/role')
-const helperFunction = require('../utils/helperfunction')
+const helperFunction = require('../utils/helperfunction');
+const { ObjectId } = require('mongodb');
 
 
 //for sign up
@@ -28,7 +29,7 @@ console.log(adduser);
        var encryptedPassword = await bcrypt.hash(adduser.password, 10);
        adduser.password = encryptedPassword;
       adduser.role = "62b243bff95f821643170749"
-      adduser.type ="Users"
+      // adduser.type ="Users"
        let insertuser = await adduser.save();
        console.log(insertuser);
       
@@ -73,30 +74,31 @@ const signIn = async (req, res) => {
       if (user && (await bcrypt.compare(password, user.password))) {
           console.log("sign in");
 
-
-          if (req.body.type == "admin") {
-            const checking = await role.findOne({
-              _id : user.role
-            })
-            if (checking.role != "admin") {
-                returnFunction(406,"Can't Login, Only Admin access",false,null,res)
-             
-            }
-        }
-
-          // if(email || phoneno && password){
-          const token = jwt.sign(
+          console.log(user.role)
+          if (user.role.equals(ObjectId("62b240c7f905ca0b6de0a5ca")))  {
+            const token = jwt.sign(
               { _id: user._id, email: user.email, phoneno: user.phoneno,role:user.role },
               process.env.TOKEN_KEY, {
                 expiresIn: "1d",
             }
               
           );
-          
-          //}
           var tokens = token;
           return res.status(200).send({ response: 200 , message: "Login Successfully", status: true , Data : user.name , token})
           // user
+        }
+        else{
+          return res.status(200).send({ response: 406 , message: "Can't Login, Only Admin access", status: false })
+
+         // return Function(406,"Can't Login, Only Admin access",false,null,res)
+        }
+
+
+          // if(email || phoneno && password){
+          
+          
+          //}
+          
          
 
       }

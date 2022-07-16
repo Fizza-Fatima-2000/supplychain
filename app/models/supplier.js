@@ -29,6 +29,10 @@ supplier_Phoneno :{
         type: Schema.Types.ObjectId,
         ref: "user"
     },
+   pro_id:{
+    type: Schema.Types.ObjectId,
+        ref: "products"
+   }
 
   
  

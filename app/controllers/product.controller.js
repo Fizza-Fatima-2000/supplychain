@@ -1,6 +1,6 @@
 const express = require('express')
 const app= express()
-const product = require('../models/product');
+const product = require('../models/products');
 
 const { helperfunction }= require('../utils/helperfunction');
 
@@ -47,6 +47,17 @@ const info_product = async (req, res)=>{
      res.send(error)
 }
 }
+
+
+
+
+
+
+
+
+
+    
+
 
 
 

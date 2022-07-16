@@ -13,6 +13,8 @@ const add_distributor = async (req, res)=>{
     const inserting_distributor =await new  distributor({
       
         distributor_name : req.body.distributor_name,
+        distributor_email : req.body.distributor_email,
+        distributor_phoneno : req.body.distributor_phoneno
        
     })
     var forsave = await inserting_distributor.save();
